@@ -25,7 +25,7 @@
       margin: 0;
       padding: 0;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: #563d7c;
       font-size: 30px;
     }
@@ -121,7 +121,17 @@
       border: 1px solid rgba(255,255,255,.1);
       font-size: 20px;
       text-align: center;
-      text-transform: uppercase
+      text-transform: uppercase;
+    }
+    
+    #results.loading {
+      height: 45px;
+    }
+
+    #results.while,
+    #results.do-while,
+    #results.for {
+      height: 1270px;
     }
     
     /* While colors */
@@ -137,10 +147,12 @@
     .while .bing {
       background-color: #ffe484;
       color: #563d7c;
+      font-weight: bold;
     }
     .while .bong {
       background-color: #fff;
       color: #563d7c;
+      font-weight: bold;
     }
     
     /* Do While colors */
@@ -156,10 +168,12 @@
     .do-while .bing {
       background-color: #ffe484;
       color: #28a745;
+      font-weight: bold;
     }
     .do-while .bong {
       background-color: #fff;
       color: #28a745;
+      font-weight: bold;
     }    
     /* For colors */
     #results.for {
@@ -174,13 +188,33 @@
     .for .bing {
       background-color: #ffe484;
       color: #17a2b8;
+      font-weight: bold;
     }
     .for .bong {
       background-color: #fff;
       color: #17a2b8;
+      font-weight: bold;
     }
     
     @media screen and (max-width: 768px) {
+      header {
+        margin-bottom: 0;
+        position: relative;
+        z-index: 2;
+      }
+      .instructions {
+        margin: 0 auto;
+        padding: 60px 40px;
+      }
+      #results {
+        padding: 30px;
+        margin-bottom: 0;
+      }
+      #results.while,
+      #results.do-while,
+      #results.for {
+        height: 1270px;
+      }
     }
     
   </style>
@@ -211,7 +245,7 @@
     // Using the While loop
     useWhile.addEventListener('click', () => {
       
-      results.style.height = '35px';
+      results.className = 'loading';
 
       let number = 1;
       let output = '';
@@ -234,7 +268,7 @@
 
 
       setTimeout( () => {
-        results.style.height = '1270px';
+        // results.style.height = '1270px';
         results.className = 'while';
         results.children[1].innerHTML = output;
       }, 600);
@@ -244,7 +278,7 @@
     // Using the Do While loop
     useDoWhile.addEventListener('click', () => {
       
-      results.style.height = '35px';
+      results.className = 'loading';
 
       let number = 1;
       let output = '';
@@ -266,7 +300,7 @@
       output += '<li>&nbsp;</li>';
 
       setTimeout( () => {
-        results.style.height = '1270px';
+        // results.style.height = '1270px';
         results.className = 'do-while';
         results.children[1].innerHTML = output;
       }, 600);
@@ -276,7 +310,7 @@
     // Using the For loop
     useFor.addEventListener('click', () => {
       
-      results.style.height = '35px';
+      results.className = 'loading';
 
       let number = 1;
       let output = '';
@@ -299,7 +333,7 @@
 
 
       setTimeout( () => {
-        results.style.height = '1270px';
+        // results.style.height = '1270px';
         results.className = 'for';
         results.children[1].innerHTML = output;
       }, 600);
