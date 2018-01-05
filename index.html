@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FSWO102-JS - Hands-On Day Two</title>
+  <link data-cloud9-id='9' href="https://fonts.googleapis.com/css?family=Anton|Roboto:400,700,900" rel="stylesheet">
+
+  <style data-cloud9-id='10' type="text/css">
+    body {
+      background-color: #f9f9f9;
+      margin: 0;
+      font-family: sans-serif;
+    }
+    header {
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,.08);
+      margin-bottom: 30px;
+      padding: 10px 0;
+      font-family: 'Anton', sans-serif;
+    }
+    h1, h2 {
+      margin: 0;
+      padding: 0;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #563d7c;
+      font-size: 30px;
+    }
+
+    h2 {
+      background-color: #fff;
+      color: #868e96;
+      display: inline-block;
+      padding: 5px 50px;
+      border-radius: 50px;
+      font-size: 30px;
+      margin-bottom: 30px;
+      box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+      letter-spacing: 0;
+    }
+    
+    span {
+      background-color: #868e96;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+      color: #fff;
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      display: inline-block;
+      text-align: center;
+      border-radius: 50px;
+    }
+
+    
+    .instructions {
+      max-width: 500px;
+      text-align: center;
+      margin: 100px auto 0 auto;
+      padding: 60px;
+      background-color: #fff;
+      box-shadow: 0 0 50px rgba(0,0,0,.1);
+    }
+    button {
+      color: #fff;
+      border: 0;
+      padding: 6px 20px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-block;
+      outline: none;
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    }
+    button:hover {
+      opacity: .8;
+    }
+    #while {
+      background-color: #563d7c;
+      color: #fff;
+    }
+    #doWhile {
+      background-color: #28a745;
+      color: #fff;
+    }
+    #for {
+      background-color: #17a2b8;
+      color: #fff;
+    }
+    
+    #results {
+      margin: 0 auto 0 auto;
+      padding: 0;
+      max-width: 540px;
+      background-color: #868e96;
+      padding: 40px;
+      overflow: hidden;
+      height: 45px;
+      /* height: 1355px; */
+      -webkit-transition: height .5s ease;
+      -moz-transition: height .5s ease;
+      -o-transition: height .5s ease;
+      transition: height .5s ease;
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      display: inline-block;
+      width: 26.7%;
+      background-color: rgba(0,0,0,.1);
+      margin: 0;
+      padding: 5px 3%;
+      border: 1px solid rgba(255,255,255,.1);
+      font-size: 20px;
+      text-align: center;
+      text-transform: uppercase
+    }
+    
+    /* While colors */
+    #results.while {
+      background-color: #563d7c;
+    }
+    .while h2 {
+      color: #563d7c;
+    }
+    .while li {
+      color: #d9c0ff;
+    }
+    .while .bing {
+      background-color: #ffe484;
+      color: #563d7c;
+    }
+    .while .bong {
+      background-color: #fff;
+      color: #563d7c;
+    }
+    
+    /* Do While colors */
+    #results.do-while {
+      background-color: #28a745;
+    }
+    .do-while h2 {
+      color: #28a745;
+    }
+    .do-while li {
+      color: #a7f7b9;
+    }
+    .do-while .bing {
+      background-color: #ffe484;
+      color: #28a745;
+    }
+    .do-while .bong {
+      background-color: #fff;
+      color: #28a745;
+    }    
+    /* For colors */
+    #results.for {
+      background-color: #17a2b8;
+    }
+    .for h2 {
+      color: #17a2b8;
+    }
+    .for li {
+      color: #81eeff;
+    }
+    .for .bing {
+      background-color: #ffe484;
+      color: #17a2b8;
+    }
+    .for .bong {
+      background-color: #fff;
+      color: #17a2b8;
+    }
+    
+    @media screen and (max-width: 768px) {
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span style="background-color: #563d7c;">The</span> <span style="background-color: #28a745;">Bing</span> <span style="background-color: #17a2b8;">Bong</span></h1>
+  </header>
+  
+  <div class="instructions">
+    <p>Which javascript loop method would you like to use?</p>
+    <button id="while">While</button>
+    <button id="doWhile">DoWhile</button>
+    <button id="for">For</button>
+  </div>
+  <div id="results">
+    <h2>Results</h2>
+    <ul></ul>
+  </div>
+  
+  <script>
+    
+    const useWhile = document.querySelector('#while');
+    const useDoWhile = document.querySelector('#doWhile');
+    const useFor = document.querySelector('#for');
+    const results = document.querySelector('#results');
+    
+    // Using the While loop
+    useWhile.addEventListener('click', () => {
+      
+      results.style.height = '35px';
+
+      let number = 1;
+      let output = '';
+
+      while( number <= 100 ) {
+    
+        if( number % 3 === 0 ) {
+          output += '<li class="bing">Bing</li>';
+        } else if( number % 5 === 0 ) {
+          output += '<li class="bong">Bong</li>';
+        } else {
+          output += `<li>${number}</li>`;
+        }
+        
+        number++;
+      }
+
+      output += '<li>&nbsp;</li>';
+      output += '<li>&nbsp;</li>';
+
+
+      setTimeout( () => {
+        results.style.height = '1270px';
+        results.className = 'while';
+        results.children[1].innerHTML = output;
+      }, 600);
+
+    });
+
+    // Using the Do While loop
+    useDoWhile.addEventListener('click', () => {
+      
+      results.style.height = '35px';
+
+      let number = 1;
+      let output = '';
+
+      do {
+    
+        if( number % 3 === 0 ) {
+          output += '<li class="bing">Bing</li>';
+        } else if( number % 5 === 0 ) {
+          output += '<li class="bong">Bong</li>';
+        } else {
+          output += `<li>${number}</li>`;
+        }
+        
+        number++;
+      } while( number <= 100 );
+
+      output += '<li>&nbsp;</li>';
+      output += '<li>&nbsp;</li>';
+
+      setTimeout( () => {
+        results.style.height = '1270px';
+        results.className = 'do-while';
+        results.children[1].innerHTML = output;
+      }, 600);
+
+    });   
+    
+    // Using the For loop
+    useFor.addEventListener('click', () => {
+      
+      results.style.height = '35px';
+
+      let number = 1;
+      let output = '';
+
+      do {
+    
+        if( number % 3 === 0 ) {
+          output += '<li class="bing">Bing</li>';
+        } else if( number % 5 === 0 ) {
+          output += '<li class="bong">Bong</li>';
+        } else {
+          output += `<li>${number}</li>`;
+        }
+        
+        number++;
+      } while( number <= 100 );
+
+      output += '<li>&nbsp;</li>';
+      output += '<li>&nbsp;</li>';
+
+
+      setTimeout( () => {
+        results.style.height = '1270px';
+        results.className = 'for';
+        results.children[1].innerHTML = output;
+      }, 600);
+
+    });   
+    
+  </script>
+</body>
+</html>
